@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'com.jaron'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url  "https://dl.bintray.com/patriques82/maven"
+    }
+}
+configurations {
+    extraLibs
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'org.patriques:alphavantage4j:1.3'
+    compile group: 'org.knowm.xchart', name: 'xchart', version: '3.5.0'
+    extraLibs group: 'org.knowm.xchart', name: 'xchart', version: '3.5.0'
+
+    configurations.compile.extendsFrom(configurations.extraLibs)
+} 
