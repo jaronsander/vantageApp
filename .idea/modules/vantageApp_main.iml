@@ -9,9 +9,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: org.knowm.xchart:xchart:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.knowm.xchart:xchart:3.5.2" level="project" />
     <orderEntry type="library" name="Gradle: org.patriques:alphavantage4j:1.3" level="project" />
-    <orderEntry type="library" name="Gradle: de.erichseifert.vectorgraphics2d:VectorGraphics2D:0.11" level="project" />
+    <orderEntry type="library" name="Gradle: de.erichseifert.vectorgraphics2d:VectorGraphics2D:0.13" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
   </component>
