@@ -1,3 +1,4 @@
+import org.knowm.xchart.OHLCChart;
 import org.knowm.xchart.XChartPanel;
 
 
@@ -5,20 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class MainFrame extends JPanel implements DetailListener {
+public class MainFrame extends JPanel implements DetailsListener {
     private DetailsPanel detailsPanel;
     protected XChartPanel chartPanel;
     private final JSplitPane splitPane;
-
-    final UpdatingChart chart = new UpdatingChart();
+    private String stock;
     public MainFrame(){
         //set layout manager
         super(new GridLayout(0, 1));
         //create components
         detailsPanel = new DetailsPanel();
         detailsPanel.addDetailListener(this);
-
-        chartPanel = new XChartPanel(getXYChart.getXYChart("MSFT"));
+        stock = "MSFT";
+        chartPanel = new XChartPanel(new GetXYChart().getXYChart(stock));
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         splitPane.setLeftComponent(detailsPanel);
@@ -32,12 +32,24 @@ public class MainFrame extends JPanel implements DetailListener {
 
     }
     @Override
-    public void detailEventOccurred(DetailEvent event){
-        String stock = event.getText();
-        chartPanel = new XChartPanel(getXYChart.getXYChart(stock));
+    public void stockEventOccurred(StockEvent event){
+        stock = event.getText();
+        chartPanel = new XChartPanel(new GetXYChart().getXYChart(stock));
         splitPane.setRightComponent(chartPanel);
-        chart.setStock(stock);
-        chart.updateData();
+        chartPanel.revalidate();
+        chartPanel.repaint();
+    }
+    @Override
+    public void chartEventOccurred(ChartEvent event){
+        chartPanel = new XChartPanel(new GetXYChart().getXYChart(stock));
+        splitPane.setRightComponent(chartPanel);
+        chartPanel.revalidate();
+        chartPanel.repaint();
+    }
+    @Override
+    public void OHLCEventOccurred(OHLCEvent event){
+        chartPanel = new XChartPanel(new GetOHLCChart().getOHLCChart(stock));
+        splitPane.setRightComponent(chartPanel);
         chartPanel.revalidate();
         chartPanel.repaint();
     }

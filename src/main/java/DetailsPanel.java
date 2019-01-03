@@ -3,7 +3,6 @@ import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.EventListener;
 
 public class DetailsPanel extends JPanel {
 
@@ -19,12 +18,32 @@ public class DetailsPanel extends JPanel {
 
         final JTextField stock = new JTextField(10);
 
+        final JButton stockChart = new JButton();
+        stockChart.setText("Chart");
+        final JButton OHLCChart = new JButton();
+        OHLCChart.setText("Candle");
+
         stock.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String name = stock.getText();
-                fireDetailEvent(new DetailEvent(this, name));
+                String name = stock.getText().toUpperCase();
+                stock.setText("");
+                fireDetailEvent(new StockEvent(this, name));
             }
         });
+
+        stockChart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fireDetailEvent(new ChartEvent(this));
+            }
+        });
+
+        OHLCChart.addActionListener((new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fireDetailEvent((new OHLCEvent(this)));
+            }
+        }));
 
 
         setLayout(new GridBagLayout());
@@ -40,6 +59,12 @@ public class DetailsPanel extends JPanel {
 
         add(label, gc);
 
+        gc.gridy = 1;
+        add(stockChart);
+
+        gc.gridy = 2;
+        add(OHLCChart);
+
         //second column
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.gridy = 0;
@@ -48,19 +73,35 @@ public class DetailsPanel extends JPanel {
         add(stock, gc);
 
     }
-    public void fireDetailEvent(DetailEvent event){
+    public void fireDetailEvent(StockEvent event){
         Object[] listeners = listenerList.getListenerList();
         for(int i = 0; i< listeners.length; i+=2){
-            if(listeners[i] == DetailListener.class);{
-                ((DetailListener)listeners[i+1]).detailEventOccurred(event);
+            if(listeners[i] == DetailsListener.class);{
+                ((DetailsListener)listeners[i+1]).stockEventOccurred(event);
+            }
+        }
+    }
+    public void fireDetailEvent(ChartEvent event){
+        Object[] listeners = listenerList.getListenerList();
+        for(int i = 0; i< listeners.length; i+=2){
+            if(listeners[i] == DetailsListener.class);{
+                ((DetailsListener)listeners[i+1]).chartEventOccurred(event);
+            }
+        }
+    }
+    public void fireDetailEvent(OHLCEvent event){
+        Object[] listeners = listenerList.getListenerList();
+        for(int i = 0; i< listeners.length; i+=2){
+            if(listeners[i] == DetailsListener.class);{
+                ((DetailsListener)listeners[i+1]).OHLCEventOccurred(event);
             }
         }
     }
 
-    public void addDetailListener(DetailListener listener){
-        listenerList.add(DetailListener.class, listener);
+    public void addDetailListener(DetailsListener listener){
+        listenerList.add(DetailsListener.class, listener);
     }
-    public void removeDetailListener(DetailListener listener){
-        listenerList.remove(DetailListener.class, listener);
+    public void removeDetailListener(DetailsListener listener){
+        listenerList.remove(DetailsListener.class, listener);
     }
 }

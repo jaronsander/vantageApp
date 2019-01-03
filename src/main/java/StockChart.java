@@ -10,7 +10,7 @@ public class StockChart{
     private static void createAndShowGUI() {
 
         // Create and set up the window.
-        JFrame frame = new JFrame("XChart Demo");
+        JFrame frame = new JFrame("Stock Chart");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // Add content to the window.

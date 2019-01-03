@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/vantageApp.iml" filepath="$PROJECT_DIR$/vantageApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vantageApp.iml" filepath="$PROJECT_DIR$/vantageApp.iml" group="vantageApp" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/vantageApp_main.iml" filepath="$PROJECT_DIR$/.idea/modules/vantageApp_main.iml" group="vantageApp" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/vantageApp_test.iml" filepath="$PROJECT_DIR$/.idea/modules/vantageApp_test.iml" group="vantageApp" />
     </modules>
